@@ -12,7 +12,6 @@ viewport.scene.add(currentShape);
 var currentShapeLine = currentShape.dlinemesh.clone();
 viewport.scene.add(currentShapeLine);
 currentShapeLine.scale.x = currentShapeLine.scale.y =currentShapeLine.scale.z = currentShape.scale.x = currentShape.scale.y =currentShape.scale.z = scaleUp;
-currentShape.position.x = currentShapeLine.position.x = scaleUp * -2;
 currentShape.rotation.y = currentShapeLine.rotation.y = 1.57079632679;
 currentShape.rotation.x = currentShapeLine.rotation.x = 1.57079632679;
 currentShape.position.x = currentShapeLine.position.x = scaleUp * 8;

@@ -26,7 +26,7 @@ class CompoundShape extends THREE.Object3D{
 		this.depthB = this.depth*(1-this.seed3);
 
 		this.mutations = [0,1,2,0,1,2,0,1];
-		this.highestM = 2;
+		this.highestM = 3;
 
 		this.mutations[0] = Math.ceil(this.seed1*this.highestM);
 		this.mutations[1] = Math.ceil(this.seed2*this.highestM);
@@ -75,7 +75,7 @@ class CompoundShape extends THREE.Object3D{
 	createCornerSolid(width, height, depth, mut){
 		var mesh;
 		var geometry;
-		if (mut==0){
+		if (mut==0||mut==3){
 			mesh = new THREE.Mesh();
 			var panel1 = this.createPanel(Math.abs(width), Math.abs(height)); mesh.add(panel1);
 			var panel2 = this.createPanel(Math.abs(depth), Math.abs(height)); mesh.add(panel2);
@@ -91,6 +91,21 @@ class CompoundShape extends THREE.Object3D{
 			panel3.position.y = height;
 			panel3.position.x = width/2;
 			panel3.position.z = depth/2;
+			if(mut==3){
+				var cylindergeometry = new THREE.CylinderBufferGeometry( Math.abs(width/4), Math.abs(width/4), Math.abs(width/2), 16, 1 , false, 0, 4.71238898037);
+				var cylindermaterial = new THREE.MeshBasicMaterial( {color: this.colour1} );
+				var cylinder = new THREE.Mesh( cylindergeometry, cylindermaterial );
+				cylinder.position.z = depth;
+				cylinder.position.x = width/2;
+				cylinder.position.y = height;
+				cylinder.rotation.z = 1.57079632679;
+				if(depth>0&&height<0){
+					cylinder.rotation.x = 3.14159265;
+				} else if(depth>0){
+					cylinder.rotation.x = 1.57079632679} else if(height<0){
+						cylinder.rotation.x = 4.71238898037};
+				mesh.add( cylinder );
+			}
 	  	} else if (mut==1){
 	  		geometry = new THREE.Geometry();
     		geometry.vertices.push(
@@ -163,7 +178,7 @@ class CompoundShape extends THREE.Object3D{
 	createCornerLines(width, height, depth, mut, altline){
 		var yoffset = height/300;
 		var mesh;
-		if(mut==0){
+		if (mut==0||mut==3){
 			mesh  = new THREE.Mesh();
 			var line1 = this.createLine(Math.abs(width), altline); mesh.add(line1);
 			var line2 = this.createLine(Math.abs(height), altline); mesh.add(line2);
@@ -182,6 +197,35 @@ class CompoundShape extends THREE.Object3D{
 			line3.position.x = width;
 			line3.position.z = depth/2;
 			line3.position.z -= Math.abs(depth/2);
+			if(mut==3){
+				var cylindergeometry = new THREE.CylinderBufferGeometry( Math.abs(width/4), Math.abs(width/4), Math.abs(width/2), 16, 1 , false, 0, 4.71238898037);
+				var cylindermaterial;
+
+
+				if(altline){
+				 cylindermaterial = new THREE.LineDashedMaterial( { transparent:true, opacity:0.2,color: this.colour2 ,linewidth: 2,scale: 2,dashSize: 0.2,gapSize: 0.1});
+			} else {
+				 cylindermaterial = new THREE.LineBasicMaterial( { color: this.colour2 } );
+			}
+
+				var cylinderedges = new THREE.EdgesGeometry( cylindergeometry );
+				var cylinder = new THREE.LineSegments( cylinderedges, cylindermaterial );
+				cylinder.position.z = depth;
+				cylinder.position.x = width/2;
+				cylinder.position.y = height;
+				cylinder.rotation.z = 1.57079632679;
+				if(depth>0&&height<0){
+					cylinder.rotation.x = 3.14159265;
+				} else if(depth>0){
+					cylinder.rotation.x = 1.57079632679} else if(height<0){
+						cylinder.rotation.x = 4.71238898037
+				};
+				
+
+				if(altline){cylinder.computeLineDistances();};
+
+				mesh.add( cylinder );
+			}
 		} else if (mut==1){
     		var geometry = new THREE.Geometry();
     		geometry.vertices.push(
