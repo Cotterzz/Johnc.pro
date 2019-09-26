@@ -41,7 +41,9 @@ class CompoundShape extends THREE.Object3D{
 		if (this.mutations[5] == this.mutations[6] ) {this.mutations[5]=0};
 		if (this.mutations[7] == this.mutations[0] ) {this.mutations[7]=0};
 
-		console.log(this.mutations.reduce((a,b)=>a+b));
+		if(this.mutations.reduce((a,b)=>a+b)==0){
+			this.mutations[2] = 2;
+		}
 
 		this.mesh = new THREE.Mesh();
 		this.solidmesh = new THREE.Mesh();
@@ -159,7 +161,7 @@ class CompoundShape extends THREE.Object3D{
 	}
 
 	createCornerLines(width, height, depth, mut, altline){
-		var yoffset = height/100;
+		var yoffset = height/300;
 		var mesh;
 		if(mut==0){
 			mesh  = new THREE.Mesh();
