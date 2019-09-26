@@ -13,12 +13,17 @@ class CompoundShape extends THREE.Object3D{
 		this.seed6 = this.nextSeed(this.seed5);
 		this.seed7 = this.nextSeed(this.seed6);
 		this.seed8 = this.nextSeed(this.seed7);
+		this.seed9 = this.nextSeed(this.seed8);
+		this.seed10 = this.nextSeed(this.seed9);
+		this.seed11 = this.nextSeed(this.seed10);
 		this.width = width/2 + width*this.seed4;
 		this.height = height/2 +height*this.seed5;
 		this.depth = depth/2 +depth*this.seed6;
-		//console.log(this.seed1, this.seed2, this.seed3, this.seed4, this.seed5);
+		console.log(this.seed11, this.seed10, this.seed9, this.seed8, this.seed7);
 		this.widthA = this.width*this.seed1;
 		this.widthB = this.width*(1-this.seed1);
+		this.widthAR = this.width*this.seed8;
+		this.widthBR = this.width*(1-this.seed8);
 		console.log(this.seed4, this.seed5, this.seed6)
 		this.heightA = this.height*this.seed2;
 		this.heightB = this.height*(1-this.seed2);
@@ -26,7 +31,7 @@ class CompoundShape extends THREE.Object3D{
 		this.depthB = this.depth*(1-this.seed3);
 
 		this.mutations = [0,1,2,0,1,2,0,1];
-		this.highestM = 3;
+		this.highestM = 6;
 
 		this.mutations[0] = Math.ceil(this.seed1*this.highestM);
 		this.mutations[1] = Math.ceil(this.seed2*this.highestM);
@@ -53,24 +58,43 @@ class CompoundShape extends THREE.Object3D{
 		this.mesh.add(this.solidmesh);
 		this.mesh.add(this.linemesh);
 		//this.mesh.add(this.dlinemesh);
-		this.createBottom();
-		this.createTop();
+		this.createBack();
+		this.createFront();
 	}
 
-	createTop(){
-		var backleft    = this.createCornerSolid(-this.widthA, this.heightA, -this.depthA, this.mutations[1]); this.solidmesh.add(backleft);
-		var backright   = this.createCornerSolid(this.widthB, this.heightA,  -this.depthA, this.mutations[2]); this.solidmesh.add(backright);
+	createFront(){
 		var frontleft   = this.createCornerSolid(-this.widthA, this.heightA, this.depthB,  this.mutations[3]); this.solidmesh.add(frontleft);
 		var frontright  = this.createCornerSolid(this.widthB, this.heightA,  this.depthB,  this.mutations[4]); this.solidmesh.add(frontright);
-		var lbackleft   = this.createCornerLines(-this.widthA, this.heightA, -this.depthA, this.mutations[1]); this.linemesh.add(lbackleft);
-		var lbackright  = this.createCornerLines(this.widthB, this.heightA,  -this.depthA, this.mutations[2]); this.linemesh.add(lbackright);
 		var lfrontleft  = this.createCornerLines(-this.widthA, this.heightA, this.depthB,  this.mutations[3]); this.linemesh.add(lfrontleft);
 		var lfrontright = this.createCornerLines(this.widthB, this.heightA,  this.depthB,  this.mutations[4]); this.linemesh.add(lfrontright);
-		var lbackleft   = this.createCornerLines(-this.widthA, this.heightA, -this.depthA, this.mutations[1], true); this.dlinemesh.add(lbackleft);
-		var lbackright  = this.createCornerLines(this.widthB, this.heightA,  -this.depthA, this.mutations[2], true); this.dlinemesh.add(lbackright);
 		var lfrontleft  = this.createCornerLines(-this.widthA, this.heightA,  this.depthB, this.mutations[3], true); this.dlinemesh.add(lfrontleft);
 		var lfrontright = this.createCornerLines(this.widthB, this.heightA,   this.depthB, this.mutations[4], true); this.dlinemesh.add(lfrontright);
+		var bfrontleft   = this.createCornerSolid(-this.widthA,  -this.heightB,  this.depthB,  this.mutations[7]);   this.solidmesh.add(bfrontleft);
+		var bfrontright  = this.createCornerSolid(this.widthB,  -this.heightB,   this.depthB,  this.mutations[0]);   this.solidmesh.add(bfrontright);
+		var blfrontleft  = this.createCornerLines(-this.widthA, -this.heightB,    this.depthB, this.mutations[7]); this.linemesh.add(blfrontleft);
+		var blfrontright = this.createCornerLines(this.widthB, -this.heightB,     this.depthB, this.mutations[0]); this.linemesh.add(blfrontright);
+		var blfrontleft  = this.createCornerLines(-this.widthA, -this.heightB,    this.depthB, this.mutations[7], true); this.dlinemesh.add(blfrontleft);
+		var blfrontright = this.createCornerLines(this.widthB, -this.heightB,     this.depthB, this.mutations[0], true); this.dlinemesh.add(blfrontright);
+
 	}
+
+	createBack(){
+		var backleft    = this.createCornerSolid(-this.widthA, this.heightA, -this.depthA, this.mutations[1]); this.solidmesh.add(backleft);
+		var backright   = this.createCornerSolid(this.widthB, this.heightA,  -this.depthA, this.mutations[2]); this.solidmesh.add(backright);
+		var lbackleft   = this.createCornerLines(-this.widthA, this.heightA, -this.depthA, this.mutations[1]); this.linemesh.add(lbackleft);
+		var lbackright  = this.createCornerLines(this.widthB, this.heightA,  -this.depthA, this.mutations[2]); this.linemesh.add(lbackright);
+		var lbackleft   = this.createCornerLines(-this.widthA, this.heightA, -this.depthA, this.mutations[1], true); this.dlinemesh.add(lbackleft);
+		var lbackright  = this.createCornerLines(this.widthB, this.heightA,  -this.depthA, this.mutations[2], true); this.dlinemesh.add(lbackright);
+		var bbackleft    = this.createCornerSolid(-this.widthA,   -this.heightB, -this.depthA, this.mutations[5]);  this.solidmesh.add(bbackleft);
+		var bbackright   = this.createCornerSolid(this.widthB,   -this.heightB,  -this.depthA, this.mutations[6]);  this.solidmesh.add(bbackright);
+		var blbackleft   = this.createCornerLines(-this.widthA,  -this.heightB,  -this.depthA, this.mutations[5]); this.linemesh.add(blbackleft);
+		var blbackright  = this.createCornerLines(this.widthB,  -this.heightB,   -this.depthA, this.mutations[6]); this.linemesh.add(blbackright);
+		var blbackleft   = this.createCornerLines(-this.widthA,  -this.heightB,  -this.depthA, this.mutations[5], true); this.dlinemesh.add(blbackleft);
+		var blbackright  = this.createCornerLines(this.widthB,  -this.heightB,   -this.depthA, this.mutations[6], true); this.dlinemesh.add(blbackright);
+
+
+	}
+
 
 	createCornerSolid(width, height, depth, mut){
 		var mesh;
@@ -130,7 +154,48 @@ class CompoundShape extends THREE.Object3D{
     		geometry.computeVertexNormals();
     		var material = new THREE.MeshBasicMaterial( {color: this.colour1, side: THREE.DoubleSide} );
 			mesh = new THREE.Mesh( geometry, material );
-	  	} else if (mut==2){
+	  	}  else if (mut==5||mut==6){
+	  		geometry = new THREE.Geometry();
+    		geometry.vertices.push(
+        		new THREE.Vector3(0, height, 0),
+        		new THREE.Vector3(width, height, 0),
+        		new THREE.Vector3(width, height, depth/10),
+        		new THREE.Vector3(width/10, height, depth/10),
+        		new THREE.Vector3(width/10, height, depth),
+        		new THREE.Vector3(0, height, depth),
+        		new THREE.Vector3(0, 0, depth),
+        		new THREE.Vector3(width, 0, depth),
+        		new THREE.Vector3(width/10, height+height/10, depth),
+        		new THREE.Vector3(width, height+height/10, depth),
+        		new THREE.Vector3(width, height+height/10, depth/10),
+        		new THREE.Vector3(width, 0, 0 ),
+        		new THREE.Vector3(width/10, height+height/10, depth/10)
+        	);
+    		geometry.faces.push(
+        		new THREE.Face3(0, 1, 2),
+        		new THREE.Face3(0, 2, 3),
+        		new THREE.Face3(0, 3, 4),
+        		new THREE.Face3(0, 4, 5),
+        		new THREE.Face3(4, 5, 6),
+        		new THREE.Face3(4, 6, 8),
+        		new THREE.Face3(8, 6, 7),
+        		new THREE.Face3(9, 8, 7),
+        		new THREE.Face3(9, 7, 10),
+        		new THREE.Face3(7, 10, 11),
+        		new THREE.Face3(10, 2, 11),
+        		new THREE.Face3(11, 2, 1),
+        		new THREE.Face3(3, 4, 8),
+        		new THREE.Face3(3, 8, 12),
+        		new THREE.Face3(2, 3, 12),
+        		new THREE.Face3(2, 12, 10),
+        		new THREE.Face3(9, 12, 8),
+        		new THREE.Face3(9, 10, 12)
+
+        	);
+    		geometry.computeVertexNormals();
+    		var material = new THREE.MeshBasicMaterial( {color: this.colour1, side: THREE.DoubleSide} );
+			mesh = new THREE.Mesh( geometry, material );
+	  	}else if (mut==2||mut==4){
 	  		geometry = new THREE.Geometry();
     		geometry.vertices.push(
         		new THREE.Vector3(0, height, 0),
@@ -209,7 +274,10 @@ class CompoundShape extends THREE.Object3D{
 			}
 
 				var cylinderedges = new THREE.EdgesGeometry( cylindergeometry );
+
 				var cylinder = new THREE.LineSegments( cylinderedges, cylindermaterial );
+
+				console.log(cylinder)
 				cylinder.position.z = depth;
 				cylinder.position.x = width/2;
 				cylinder.position.y = height;
@@ -248,7 +316,40 @@ class CompoundShape extends THREE.Object3D{
 			}
 			mesh = new THREE.Line( geometry, material );
 			if(altline){mesh.computeLineDistances();};
-		} else if (mut==2){
+		} else if (mut==5||mut==6){
+			geometry = new THREE.Geometry();
+    		geometry.vertices.push(
+        		new THREE.Vector3(width, height, 0),
+        		new THREE.Vector3(width, height, depth/10),
+        		new THREE.Vector3(width/10, height, depth/10),
+        		new THREE.Vector3(width/10, height, depth),
+        		new THREE.Vector3(0, height, depth),
+        		new THREE.Vector3(width/10, height, depth),
+        		new THREE.Vector3(width/10, height+height/10, depth),
+        		new THREE.Vector3(width, height+height/10, depth),
+        		new THREE.Vector3(width, 0, depth),
+        		new THREE.Vector3(width, height+height/10, depth),
+        		new THREE.Vector3(width, height+height/10, depth/10),
+        		new THREE.Vector3(width/10, height+height/10, depth/10),
+        		new THREE.Vector3(width/10, height, depth/10),
+        		new THREE.Vector3(width/10, height+height/10, depth/10),
+        		new THREE.Vector3(width, height+height/10, depth/10),
+        		new THREE.Vector3(width, height, depth/10),
+        		new THREE.Vector3(width, height+height/10, depth/10),
+        		new THREE.Vector3(width/10, height+height/10, depth/10),
+        		new THREE.Vector3(width/10, height+height/10, depth)
+
+
+        	);
+        	var material;
+			if(altline){
+				material = new THREE.LineDashedMaterial( { transparent:true, opacity:0.3,color: this.colour2 ,linewidth: 2,scale: 2,dashSize: 0.2,gapSize: 0.1});
+			} else {
+				material = new THREE.LineBasicMaterial({ color: this.colour2 });
+			}
+			mesh = new THREE.Line( geometry, material );
+			if(altline){mesh.computeLineDistances();} else {mesh.position.y+=yoffset;}
+		} else if (mut==2||mut==4){
 			geometry = new THREE.Geometry();
     		geometry.vertices.push(
         		new THREE.Vector3(width, height, 0),
@@ -283,21 +384,6 @@ class CompoundShape extends THREE.Object3D{
 			if(altline){mesh.computeLineDistances();} else {mesh.position.y+=yoffset;}
 		}
 		return (mesh);
-	}
-
-	createBottom(){
-		var bbackleft    = this.createCornerSolid(-this.widthA,   -this.heightB, -this.depthA, this.mutations[5]);  this.solidmesh.add(bbackleft);
-		var bbackright   = this.createCornerSolid(this.widthB,   -this.heightB,  -this.depthA, this.mutations[6]);  this.solidmesh.add(bbackright);
-		var bfrontleft   = this.createCornerSolid(-this.widthA,  -this.heightB,  this.depthB,  this.mutations[7]);   this.solidmesh.add(bfrontleft);
-		var bfrontright  = this.createCornerSolid(this.widthB,  -this.heightB,   this.depthB,  this.mutations[0]);   this.solidmesh.add(bfrontright);
-		var blbackleft   = this.createCornerLines(-this.widthA,  -this.heightB,  -this.depthA, this.mutations[5]); this.linemesh.add(blbackleft);
-		var blbackright  = this.createCornerLines(this.widthB,  -this.heightB,   -this.depthA, this.mutations[6]); this.linemesh.add(blbackright);
-		var blfrontleft  = this.createCornerLines(-this.widthA, -this.heightB,    this.depthB, this.mutations[7]); this.linemesh.add(blfrontleft);
-		var blfrontright = this.createCornerLines(this.widthB, -this.heightB,     this.depthB, this.mutations[0]); this.linemesh.add(blfrontright);
-		var blbackleft   = this.createCornerLines(-this.widthA,  -this.heightB,  -this.depthA, this.mutations[5], true); this.dlinemesh.add(blbackleft);
-		var blbackright  = this.createCornerLines(this.widthB,  -this.heightB,   -this.depthA, this.mutations[6], true); this.dlinemesh.add(blbackright);
-		var blfrontleft  = this.createCornerLines(-this.widthA, -this.heightB,    this.depthB, this.mutations[7], true); this.dlinemesh.add(blfrontleft);
-		var blfrontright = this.createCornerLines(this.widthB, -this.heightB,     this.depthB, this.mutations[0], true); this.dlinemesh.add(blfrontright);
 	}
 
 	createPanel(width, height){
