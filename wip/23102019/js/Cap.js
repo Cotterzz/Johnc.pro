@@ -31,9 +31,12 @@ class Cap extends TFEObject{
     		case 3:
     		this.createBodyD();
     		break;
-    		//case 4:
-    		//this.createBodyE();
-    		//break;
+    		case 4:
+    		this.createBodyE();
+    		break;
+    		case 5:
+    		this.createBodyF();
+    		break;
     		default:
     		this.createBodyA();
     		break;
@@ -552,102 +555,157 @@ class Cap extends TFEObject{
 			
 	}
 
-//createBodyE(){
-//	// ABBREVIATIONS
-//	console.log("CAPA", this.source);
-//	var dl = this.defaultLineColor; var df = this.defaultFaceColor;
-//	var sp = this.secondpass; var o = global.offset; var e = global.ETA;
-//	var d = this.depth; var h = this.height; var w = this.width;
-//	var pa = this.propA; var pb = this.propB; var pc = this.propC;
-//	// CAP LINES
- //    		0, h, 0,
- //    		0, h*1.5, d,
- //    		w, h*1.5, d,
- //    		w, h, 0,
- //    		w, 0, 0,
- //    		w, 0, d,
- //    		0, 0, d,
- //    		0, h, d 
- //		
- //    		new THREE.Face3(0, 1, 3),
- //    		new THREE.Face3(3, 1, 2),
- //    		new THREE.Face3(0, 7, 1),
- //    		new THREE.Face3(1, 6, 5),
- //    		new THREE.Face3(1, 5, 2),
- //    		new THREE.Face3(2, 5, 3),
- //    		new THREE.Face3(3, 5, 4)
- //    	
- //		geometry.computeVertexNormals();
- //		var material = new THREE.MeshBasicMaterial( {color: this.colour1, side: THREE.DoubleSide} );
-//		mesh = new THREE.Mesh( geometry, material );
- //	var vertices = new Float32Array( [
- //		0-o, h+o, 0-o,//0
- //		0-o, 0, 0-o,//2
+	createBodyE(){
+		// ABBREVIATIONS
+		console.log("CAPA", this.source);
+		var dl = this.defaultLineColor; var df = this.defaultFaceColor;
+		var sp = this.secondpass; var o = global.offset; var e = global.ETA;
+		var d = this.depth; var h = this.height; var w = this.width;
+		var pa = this.propA; var pb = this.propB; var pc = this.propC;
+		// CAP LINES
+		var vertices = new Float32Array( [
+	   		//0-o, 0, 0-o, //0
+	   		//w+o, 0, 0-o, //1
 
- //		0-o, h+o, d+o,//5
- //		0-o, 0, d+o,//3
+	   		//w+o, 0, d+o, //2
+	   		//0-o, 0, d+o, //3
 
- //		  w+o, h+o, 0-o,//1
- //		   w+o, 0, 0-o,//4
+	   		w+o, 0, 0-o, //1
+	   		w+o, 0, d+o, //2
+	   		0-o, 0, d+o, //3	   		
+	   		0-o, 0, 0-o, //0
+	   		w*pa, h*pb+o, d+o, //4
+	   		w*pa, h*pb+o, 0-o, //5
 
- //		0-o, h+o, 0-o,//0
- //		w+o, h+o, 0-o,//1
+	   		w*pa, h*pb+o, 0-o, //5
+	   		w+o, 0, 0-o, //1
 
- //		0-o, h+o, 0-o,//0
- //		0-o, h+o, d+o,//5
+	   		w*pa, h*pb+o, 0-o, //5
+	   		0-o, 0, 0-o, //0
 
-//		w+o, 0, d+o,//6
- //		  w+o, h+o, d+o,//7
+	   		w*pa, h*pb+o, d+o, //4
+	   		w+o, 0, d+o, //2
 
- //		   w+o, h+o, 0-o,//1
- //		  w+o, h+o, d+o,//7
+	   		0-o, 0, d+o, //3
+	   		w*pa, h*pb+o, d+o //4
+	   	]);
 
- //		   0-o, h+o, d+o,//5
- //		   w+o, h+o, d+o//7
+	   	var linegeometry = new THREE.BufferGeometry();
+		linegeometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
 
-
-//	] );
-//	var linegeometry = new THREE.BufferGeometry();
-//	linegeometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
-
- //    var linematerial;
-//	if(sp){
-//		linematerial = new THREE.LineDashedMaterial( { transparent:true, opacity:0.2,color: dl ,linewidth: 2,scale: 2,dashSize: 0.2,gapSize: 0.2});
-//	} else {
-//		linematerial = new THREE.LineBasicMaterial({ color: dl });
-//	}
-//	var linemesh = new THREE.LineSegments( linegeometry, linematerial );
-//	
-//	this.mesh.add(linemesh);
-//	if(sp){linemesh.computeLineDistances();}
-//	linemesh.position.x = w/-2;linemesh.position.z = d/-2;
-
-//	// CAP SOLID FACES
-//	if(!sp){
-//		var panel_t = this.createPanel(w, d);
-//		var panel_f = this.createPanel(w, h);
-//		var panel_e = this.createPanel(w, h);
-//		var panel_l = this.createPanel(h, d);
-//		var panel_r = this.createPanel(h, d);
-//		this.orientPlanetoXZ(panel_t);
-//		this.orientPlanetoYZ(panel_l);
-//		this.orientPlanetoYZ(panel_r);
-//		panel_l.rotation.x = e;
-//		panel_r.rotation.x = e;
-//		panel_t.position.y = h;
-//		panel_f.position.z = d/-2;
-//		panel_e.position.z = d/2;
-//		panel_l.position.x = w/-2;
-//		panel_r.position.x = w/2;
-//		panel_f.position.y = h/2;
-//		panel_e.position.y = h/2;
-//		panel_l.position.y = h/2;
-//		panel_r.position.y = h/2;
-//		this.mesh.add(panel_t);
-//		this.mesh.add(panel_f);
-//		this.mesh.add(panel_e);
-//		this.mesh.add(panel_l);
-//		this.mesh.add(panel_r);
-//	}
+        var linematerial;
+		if(sp){
+			linematerial = new THREE.LineDashedMaterial( { transparent:true, opacity:0.3,color: dl ,linewidth: 2,scale: 2,dashSize: 0.2,gapSize: 0.2});
+		} else {
+			linematerial = new THREE.LineBasicMaterial({ color: dl });
+		}
+		var linemesh = new THREE.LineSegments( linegeometry, linematerial );
+		if(sp){linemesh.computeLineDistances();}
+		this.mesh.add(linemesh);
+		linemesh.position.x = w/-2;linemesh.position.z = d/-2;
+ 
+				// CAP FACES
+		if(!sp){
+			var facegeometry = new THREE.Geometry();
+    		facegeometry.vertices.push(
+    			new THREE.Vector3(0, 0, 0), //0
+    			new THREE.Vector3(w, 0, 0), //1
+	   			new THREE.Vector3(w, 0, d), //2
+	   			new THREE.Vector3(0, 0, d), //3	  
+	   			new THREE.Vector3(w*pa, h*pb, d), //4
+	   			new THREE.Vector3(w*pa, h*pb, 0) //5
 	
+        	);
+    		facegeometry.faces.push(
+    			new THREE.Face3(1, 5, 0),
+    			new THREE.Face3(2, 4, 3),
+    			new THREE.Face3(1, 5, 4),
+    			new THREE.Face3(1, 4, 2),
+    			new THREE.Face3(0, 5, 4),
+    			new THREE.Face3(0, 4, 3)      		
+
+        	);
+    		facegeometry.computeVertexNormals();
+    		var facematerial = new THREE.MeshBasicMaterial( {color: df, side: THREE.DoubleSide} );
+			var facemesh = new THREE.Mesh( facegeometry, facematerial );
+			this.mesh.add(facemesh);
+			facemesh.position.x = w/-2;facemesh.position.z = d/-2;
+		}
+
+	}
+
+	createBodyF(){
+		// ABBREVIATIONS
+		console.log("CAPA", this.source);
+		var dl = this.defaultLineColor; var df = this.defaultFaceColor;
+		var sp = this.secondpass; var o = global.offset; var e = global.ETA;
+		var d = this.depth; var h = this.height; var w = this.width;
+		var pa = this.propA; var pb = this.propB; var pc = this.propC;
+		// CAP LINES
+		var vertices = new Float32Array( [
+	   		0-o, 0, 0-o, //0
+	   		w+o, 0, 0-o, //1
+
+	   		w+o, 0, d+o, //2
+	   		0-o, 0, d+o, //3
+
+	   		w+o, 0, 0-o, //1
+	   		w+o, 0, d+o, //2
+
+	   		0-o, 0, d+o, //3	   		
+	   		0-o, 0, 0-o, //0
+
+
+	   		w*pa, h*pb+o, d*pc, //4
+	   		w+o, 0, 0-o, //1
+
+	   		w*pa, h*pb+o, d*pc, //4
+	   		0-o, 0, 0-o, //0
+
+	   		w*pa, h*pb+o, d*pc, //4
+	   		w+o, 0, d+o, //2
+
+	   		0-o, 0, d+o, //3
+	   		w*pa, h*pb+o, d*pc, //4
+	   	]);
+
+	   	var linegeometry = new THREE.BufferGeometry();
+		linegeometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+
+        var linematerial;
+		if(sp){
+			linematerial = new THREE.LineDashedMaterial( { transparent:true, opacity:0.3,color: dl ,linewidth: 2,scale: 2,dashSize: 0.2,gapSize: 0.2});
+		} else {
+			linematerial = new THREE.LineBasicMaterial({ color: dl });
+		}
+		var linemesh = new THREE.LineSegments( linegeometry, linematerial );
+		if(sp){linemesh.computeLineDistances();}
+		this.mesh.add(linemesh);
+		linemesh.position.x = w/-2;linemesh.position.z = d/-2;
+ 
+				// CAP FACES
+		if(!sp){
+			var facegeometry = new THREE.Geometry();
+    		facegeometry.vertices.push(
+    			new THREE.Vector3(0, 0, 0), //0
+    			new THREE.Vector3(w, 0, 0), //1
+	   			new THREE.Vector3(w, 0, d), //2
+	   			new THREE.Vector3(0, 0, d), //3	  
+	   			new THREE.Vector3(w*pa, h*pb+o, d*pc) //4
+        	);
+    		facegeometry.faces.push(
+    			new THREE.Face3(1, 4, 0),
+    			new THREE.Face3(2, 4, 3),
+    			new THREE.Face3(1, 4, 2),
+    			new THREE.Face3(0, 4, 3)      		
+
+        	);
+    		facegeometry.computeVertexNormals();
+    		var facematerial = new THREE.MeshBasicMaterial( {color: df, side: THREE.DoubleSide} );
+			var facemesh = new THREE.Mesh( facegeometry, facematerial );
+			this.mesh.add(facemesh);
+			facemesh.position.x = w/-2;facemesh.position.z = d/-2;
+		}
+
+	}
 }

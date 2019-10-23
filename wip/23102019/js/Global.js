@@ -19,9 +19,9 @@ class Global {
 		this.RADIAN = 57.29579;
 
 		this.variationA = Math.floor(Math.random()*2);
-		this.variationB = Math.floor(Math.random()*4);
-		this.variationC = Math.floor(Math.random()*4);
-		this.variationD = Math.floor(Math.random()*4);
+		this.variationB = Math.floor(Math.random()*6);
+		this.variationC = Math.floor(Math.random()*6);
+		this.variationD = Math.floor(Math.random()*6);
 		if(this.variationB+this.variationC==0){this.variationB=1;}
 		this.rotationA = Math.floor(Math.random()*3);
 		this.rotationB = Math.floor(Math.random()*3);
