@@ -1,0 +1,11 @@
+body {
+        		font-family: 'Quicksand', sans-serif;
+    			background-color: #aaaaaa;
+
+}
+
+div {
+  height: 600px;
+  width: 1000px;
+  background-color: powderblue;
+}
