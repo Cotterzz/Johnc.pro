@@ -5,7 +5,7 @@ class CompoundShape extends TFEObject{
 		this.width = width;
 		this.height = width*global.weightA;
 		this.depth = width*global.weightB;
-		
+		this.totalHeight = 0;
 		this.mesh = new THREE.Mesh();
 		this.solidmeshcontainer = new THREE.Mesh();
 		this.linemeshcontainer = new THREE.Mesh();
@@ -262,6 +262,7 @@ class CompoundShape extends TFEObject{
 		cap_t.position.y = h/2//
 		cap_t.position.x = rx-mw/2;
 
+		this.totalHeight = h + cap_t.totalHeight;
 		if(!secondPass){
 			this.createBodyB(true);
 		}

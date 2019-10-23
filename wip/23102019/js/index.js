@@ -28,58 +28,64 @@ function addbg(){
 //viewport.addEventListener("enterframe", enterframe);
 //viewport.addEventListener("resize", resize)
 var scaleUp = 50;
+var scaleUpPos = scaleUp;
 var answerScaleUp = 35;
 var pushout = 250;
-var currentShape = new CompoundShape(2.5, 2.5, 2.5, Math.random());
-viewport.scene.add(currentShape);
+var currentShape = new CompoundShape(2.2, 2.2, 2.2, Math.random());
+if(currentShape.totalHeight>2.2){
+    scaleUp /=(currentShape.totalHeight/2.2);
+    answerScaleUp /=(currentShape.totalHeight/2.2);
+}
+//viewport.scene.add(currentShape);
 var currentShapeLine = currentShape.dlinemeshcontainer.clone();
-viewport.scene.add(currentShapeLine);
+//viewport.scene.add(currentShapeLine);
 currentShapeLine.scale.x = currentShapeLine.scale.y =currentShapeLine.scale.z = currentShape.scale.x = currentShape.scale.y =currentShape.scale.z = scaleUp;
 //currentShape.rotation.y = currentShapeLine.rotation.y = 1.57079632679;
 //currentShape.rotation.x = currentShapeLine.rotation.x = 1.57079632679;
 //currentShape.position.x = currentShapeLine.position.x = scaleUp * -8;
-currentShape.position.y = currentShapeLine.position.y = scaleUp *8;
+currentShape.position.y = 800;
+currentShapeLine.position.y = 800;
 currentShapeLine.position.z +=pushout;
 
 var answerA = currentShape.mesh.clone();
 viewport.scene.add(answerA);
 answerA.scale.x = answerA.scale.y =answerA.scale.z = answerScaleUp;
-answerA.position.y = scaleUp *-4;
-answerA.position.x = scaleUp * -3;
+answerA.position.y = scaleUpPos *-4;
+answerA.position.x = scaleUpPos * -3;
 
 var answerB = currentShape.mesh.clone();
 viewport.scene.add(answerB);
 answerB.scale.y =answerB.scale.z = answerScaleUp;
 answerB.scale.x = -answerScaleUp;
-answerB.position.y = scaleUp *-4;
-answerB.position.x = scaleUp *0;
+answerB.position.y = scaleUpPos *-4;
+answerB.position.x = scaleUpPos *0;
 
 var answerC = currentShape.mesh.clone();
 viewport.scene.add(answerC);
 answerC.scale.x = answerC.scale.y =answerC.scale.z = answerScaleUp;
-answerC.position.y = scaleUp *-4;
-answerC.position.x = scaleUp *3;
+answerC.position.y = scaleUpPos *-4;
+answerC.position.x = scaleUpPos *3;
 
 var answerD = currentShape.mesh.clone();
 viewport.scene.add(answerD);
 answerD.scale.y =answerD.scale.z = answerScaleUp;
 answerD.scale.x = -answerScaleUp;
-answerD.position.y = scaleUp *-4;
-answerD.position.x = scaleUp *6;
+answerD.position.y = scaleUpPos *-4;
+answerD.position.x = scaleUpPos *6;
 
 var answerBline = currentShape.dlinemeshcontainer.clone();
 viewport.scene.add(answerBline);
 answerBline.scale.y =answerBline.scale.z = answerScaleUp;
 answerBline.scale.x = -answerScaleUp;
-answerBline.position.y = scaleUp *-4;
-answerBline.position.x = scaleUp *0;
+answerBline.position.y = scaleUpPos *-4;
+answerBline.position.x = scaleUpPos *0;
 answerBline.position.z +=pushout;
 
 var answerCline = currentShape.dlinemeshcontainer.clone();
 viewport.scene.add(answerCline);
 answerCline.scale.x = answerCline.scale.y =answerCline.scale.z = answerScaleUp;
-answerCline.position.y = scaleUp *-4;
-answerCline.position.x = scaleUp *3;
+answerCline.position.y = scaleUpPos *-4;
+answerCline.position.x = scaleUpPos *3;
 answerCline.position.z +=pushout;
 
 var currentShapeTop = currentShape.mesh.clone();
@@ -88,8 +94,8 @@ viewport.scene.add(currentShapeTop);
 var currentShapeTopLine = currentShape.dlinemeshcontainer.clone();
 viewport.scene.add(currentShapeTopLine);
 currentShapeTopLine.scale.x = currentShapeTopLine.scale.y =currentShapeTopLine.scale.z = currentShapeTop.scale.x = currentShapeTop.scale.y =currentShapeTop.scale.z = scaleUp;
-currentShapeTopLine.position.x = currentShapeTop.position.x = scaleUp * -8;
-currentShapeTopLine.position.y = currentShapeTop.position.y = scaleUp * 4;
+currentShapeTopLine.position.x = currentShapeTop.position.x = scaleUpPos * -8;
+currentShapeTopLine.position.y = currentShapeTop.position.y = scaleUpPos * 3.5;
 currentShapeTopLine.rotation.x = currentShapeTop.rotation.x = 1.57079632679;
 currentShapeTopLine.position.z +=pushout;
 
@@ -99,7 +105,8 @@ viewport.scene.add(currentShapeSide);
 var currentShapeSideLine = currentShape.dlinemeshcontainer.clone();
 viewport.scene.add(currentShapeSideLine);
 currentShapeSideLine.scale.x = currentShapeSideLine.scale.y =currentShapeSideLine.scale.z = currentShapeSide.scale.x = currentShapeSide.scale.y =currentShapeSide.scale.z = scaleUp;
-currentShapeSideLine.position.x = currentShapeSide.position.x = scaleUp * -3;
+currentShapeSideLine.position.x = currentShapeSide.position.x = scaleUpPos * -3;
+currentShapeSideLine.position.y = currentShapeSide.position.y = scaleUpPos * -1;
 currentShapeSideLine.rotation.y = currentShapeSide.rotation.y = -1.57079632679;
 currentShapeSideLine.position.z +=pushout
 
@@ -107,13 +114,13 @@ currentShapeSideLine.position.z +=pushout
 var currentShapeAnimated = currentShape.mesh.clone();
 currentShapeAnimated.scale.x = currentShapeAnimated.scale.y =currentShapeAnimated.scale.z = scaleUp;
 viewport.scene.add(currentShapeAnimated);
-currentShapeAnimated.position.x = scaleUp * -3;
+currentShapeAnimated.position.x = scaleUpPos * -3;
 
 var currentShapeAnimatedLines = currentShape.dlinemeshcontainer.clone();
 currentShapeAnimatedLines.scale.x = currentShapeAnimatedLines.scale.y =currentShapeAnimatedLines.scale.z = scaleUp;
 viewport.scene.add(currentShapeAnimatedLines);
-currentShapeAnimatedLines.position.x = scaleUp * -3;
-currentShapeAnimatedLines.position.y = currentShapeAnimated.position.y = scaleUp * 4;
+currentShapeAnimatedLines.position.x = scaleUpPos * -3;
+currentShapeAnimatedLines.position.y = currentShapeAnimated.position.y = scaleUpPos * 3.5;
 currentShapeAnimatedLines.position.z +=pushout;
 
 
