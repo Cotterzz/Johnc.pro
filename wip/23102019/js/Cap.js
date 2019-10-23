@@ -37,6 +37,9 @@ class Cap extends TFEObject{
     		case 5:
     		this.createBodyF();
     		break;
+    		case 6:
+    		this.createBodyG();
+    		break;
     		default:
     		this.createBodyA();
     		break;
@@ -707,5 +710,185 @@ class Cap extends TFEObject{
 			facemesh.position.x = w/-2;facemesh.position.z = d/-2;
 		}
 
+	}
+
+	createBodyG(){
+		var mesh  = new THREE.Mesh();
+		// ABBREVIATIONS
+		console.log("CAPC");
+		var dl = this.defaultLineColor; var df = this.defaultFaceColor;
+		var sp = this.secondpass; var o = global.offset; var e = global.ETA;
+		var d = this.depth; var h = this.height; var w = this.width;
+		var pa = this.propA; var pb = this.propB; var pc = this.propC;
+
+		var r = d/2;
+
+		this.totalHeight = r + h;
+		// CAP LINES
+    	var vertices = new Float32Array( [
+    		0-o, h+o, 0-o,//0
+    		0-o, 0, 0-o,//2
+
+    		0-o, h+o, d+o,//5
+    		0-o, 0, d+o,//3
+
+    		  w+o, h+o, 0-o,//1
+    		   w+o, 0, 0-o,//4
+
+			w+o, 0, d+o,//6
+    		w+o, h+o, d+o//7
+
+		] );
+		var linegeometry = new THREE.BufferGeometry();
+		linegeometry.setAttribute( 'position', new THREE.BufferAttribute( vertices, 3 ) );
+
+        var linematerial;
+		if(sp){
+			linematerial = new THREE.LineDashedMaterial( { transparent:true, opacity:0.2,color: dl ,linewidth: 2,scale: 2,dashSize: 0.2,gapSize: 0.2});
+		} else {
+			linematerial = new THREE.LineBasicMaterial({ color: dl });
+		}
+		var linemesh = new THREE.LineSegments( linegeometry, linematerial );
+		
+		this.mesh.add(linemesh);
+		if(sp){linemesh.computeLineDistances();}
+		linemesh.position.x = w/-2;linemesh.position.z = d/-2;
+
+		var cylindergeometry = new THREE.CylinderBufferGeometry( r, r, w, 64, 1 , false, 0, global.PI);
+		var cylindermaterial;
+
+		if(sp){
+			//cylindermaterial = new THREE.LineDashedMaterial( { transparent:true, opacity:0.05,color: dl ,linewidth: 2,scale: 2,dashSize: 0.2,gapSize: 0.1});
+			cylindermaterial = new THREE.LineBasicMaterial( { transparent:true, opacity:0.1, color: global.darkgreen } );
+		} else {
+			cylindermaterial = new THREE.LineBasicMaterial( { transparent:true, opacity:0.3, color: global.darkgreen } );
+		}
+
+		var cylinderedges = new THREE.EdgesGeometry( cylindergeometry );
+
+		var cylinder = new THREE.LineSegments( cylinderedges, cylindermaterial );
+
+		console.log(cylinder)
+		cylinder.position.z = 0;
+		//cylinder.position.x = w/2;
+		cylinder.position.y = h;
+		cylinder.rotation.z = 1.57079632679;
+		cylinder.rotation.x = 0;
+		//if(d>0&&h<0){
+		//	cylinder.rotation.x = 3.14159265;
+		//} else if(d>0){
+		//	} else if(h<0){
+		//		cylinder.rotation.x = 4.71238898037
+		//};
+		//		
+
+				if(sp){cylinder.computeLineDistances();};
+
+		mesh.add( cylinder );
+		this.mesh.add(mesh);
+		if(!sp){
+		var cylindergeometry = new THREE.CylinderBufferGeometry( r, r, w, 64, 1 , false, 0,global.PI);
+				var cylindermaterial = new THREE.MeshBasicMaterial( {color: df} );
+				var cylinder = new THREE.Mesh( cylindergeometry, cylindermaterial );
+				cylinder.position.z = 0;
+				//cylinder.position.x = w/2;
+				cylinder.position.y = h;
+				cylinder.rotation.z = 1.57079632679;
+				cylinder.rotation.x = 0;
+			//	if(d>0&&h<0){
+			//		cylinder.rotation.x = 3.14159265;
+			//	} else if(d>0){
+			//		cylinder.rotation.x = 1.57079632679} else if(h<0){
+			//			cylinder.rotation.x = 4.71238898037};
+				mesh.add( cylinder );
+			}
+			var pacmanmaterial;
+			//var pacmangeometry = new THREE.CircleGeometry( r+o, 64 , 0, global.PI);
+
+			var pcurve = new THREE.EllipseCurve(
+				0,  0,            // ax, aY
+				r+o, r+o,           // xRadius, yRadius
+				0,  Math.PI,  // aStartAngle, aEndAngle
+				false,            // aClockwise
+				0                 // aRotation
+			);
+
+			var ppoints = pcurve.getPoints( 64 );
+			var pacmangeometry = new THREE.BufferGeometry().setFromPoints( ppoints );
+
+			//var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+
+			// Create the final object to add to the scene
+			
+
+			if(sp){
+				 	pacmanmaterial = new THREE.LineDashedMaterial( { transparent:true, opacity:0.2,color: dl ,linewidth: 2,scale: 2,dashSize: 0.2,gapSize: 0.1});
+				} else {
+				 	pacmanmaterial = new THREE.LineBasicMaterial( { color: dl } );
+				}
+
+			//var ellipse = new THREE.Line( pacmangeometry, pacmanmaterial );
+
+			//var pacmanedges = new THREE.EdgesGeometry( pacmangeometry );
+
+			var pacman = new THREE.Line( pacmangeometry, pacmanmaterial );
+			//var pacman = new THREE.Mesh( pacmangeometry, pacmanmaterial );
+			//
+
+			//pacman.position.z = d/2+o;
+				
+				pacman.position.y = h+o;
+				pacman.rotation.y = 1.57079632679;
+				//pacman.rotation.z = 1.57079632679;
+				pacman.rotation.x = 0;
+			//	if(d>0&&h<0){
+			//		pacman.rotation.x = 3.14159265;
+			//	} else if(d>0){
+			//		pacman.rotation.x = 1.57079632679} else if(h<0){
+			//		pacman.rotation.x = 4.71238898037
+			//	};
+
+
+
+			var pacman2=pacman.clone();
+			pacman2.position.x=w/2;
+			pacman.position.x=w/-2;
+			pacman2.position.x+=o;
+			pacman.position.x-=o;
+			//
+			this.mesh.add(mesh);
+			if(sp){
+				pacman.computeLineDistances();
+			} ;
+			mesh.add( pacman );
+				mesh.add( pacman2 );
+
+			// CAP SOLID FACES
+		if(!sp){
+			//var panel_t = this.createPanel(w, d);
+			var panel_f = this.createPanel(w, h+o);
+			var panel_e = this.createPanel(w, h+o);
+			var panel_l = this.createPanel(h+o, d);
+			var panel_r = this.createPanel(h+o, d);
+			//this.orientPlanetoXZ(panel_t);
+			this.orientPlanetoYZ(panel_l);
+			this.orientPlanetoYZ(panel_r);
+			panel_l.rotation.x = e;
+			panel_r.rotation.x = e;
+			//panel_t.position.y = h;
+			panel_f.position.z = d/-2;
+			panel_e.position.z = d/2;
+			panel_l.position.x = w/-2-(o*0.9);
+			panel_r.position.x = w/2+(o*0.9);
+			panel_f.position.y = h/2;
+			panel_e.position.y = h/2;
+			panel_l.position.y = h/2;
+			panel_r.position.y = h/2;
+			//this.mesh.add(panel_t);
+			this.mesh.add(panel_f);
+			this.mesh.add(panel_e);
+			this.mesh.add(panel_l);
+			this.mesh.add(panel_r);
+		}
 	}
 }
