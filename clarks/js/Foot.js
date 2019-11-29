@@ -1,10 +1,12 @@
 class Foot extends THREE.Object3D{
 	constructor(){
 		super();
+		this.mesh = null;
 		var loader = new THREE.GLTFLoader();
 
-		loader.load( './models/left.glb',  ( geometry ) => {
-     		this.add( new THREE.Mesh( geometry ) );
+		loader.load( '/models/left.glb',  ( geometry ) => {
+     		this.mesh = new THREE.Mesh( geometry );
+     		this.add(this.mesh);
      		console.log("LOADED:", geometry)
    		})
 
