@@ -7,10 +7,27 @@ var data = {
 		"z":0,
 		"nodes":[
 		{
+			"title":"Zoom, pan & rotate with the mouse keys.",
+			"type":"none",
+			"x":-14,
+			"y":7,
+			"z":3,
+			"nodes":[
+				{
+				"title":"(same as three.js default orbit controls.)",
+				"type":"none",
+				"x":2,
+				"y":-3,
+				"z":3,
+				"nodes":[]
+				}
+			]
+		},
+		{
 			"title":"Left",
 			"type":"foot",
-			"x":-15,
-			"y":-10,
+			"x":-18,
+			"y":-15,
 			"z":3,
 			"nodes":[
 				{
@@ -26,8 +43,8 @@ var data = {
 		{
 			"title":"Right",
 			"type":"foot",
-			"x":15,
-			"y":-10,
+			"x":18,
+			"y":-15,
 			"z":3,
 			"nodes":[
 				{
