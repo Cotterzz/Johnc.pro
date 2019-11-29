@@ -4,7 +4,7 @@ class Foot extends THREE.Object3D{
 		this.mesh = null;
 		var loader = new THREE.STLLoader();
 
-		loader.load( 'clarks/models/left.stl',  ( geometry ) => {
+		loader.load( '/models/left.stl',  ( geometry ) => {
      		this.mesh = new THREE.Mesh( geometry );
      		this.add(this.mesh);
      		console.log("LOADED:", geometry)
