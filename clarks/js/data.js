@@ -7,14 +7,14 @@ var data = {
 		"z":0,
 		"nodes":[
 		{
-			"title":"LEFT",
+			"title":"Left",
 			"type":"foot",
 			"x":-15,
 			"y":-10,
 			"z":3,
 			"nodes":[
 				{
-				"title":"Low Resolution Stl (1000 vertices)",
+				"title":"Low Resolution gltf (1000 vertices)",
 				"type":"none",
 				"x":-10,
 				"y":-10,
@@ -24,14 +24,14 @@ var data = {
 			]
 		},
 		{
-			"title":"RIGHT",
+			"title":"Right",
 			"type":"foot",
 			"x":15,
 			"y":-10,
 			"z":3,
 			"nodes":[
 				{
-				"title":"Original Resolution Stl (5000 vertices)",
+				"title":"Original Resolution gltf (5000 vertices)",
 				"type":"none",
 				"x":10,
 				"y":-10,
