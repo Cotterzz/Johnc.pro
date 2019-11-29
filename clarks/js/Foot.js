@@ -5,6 +5,7 @@ class Foot extends THREE.Object3D{
 
 		loader.load( './models/left.glb',  ( geometry ) => {
      		this.add( new THREE.Mesh( geometry ) );
+     		console.log("LOADED:", geometry)
    		})
 
 		//loader.parse( gltfData, null, ( gdata ) => {
