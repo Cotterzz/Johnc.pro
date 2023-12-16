@@ -16,28 +16,55 @@
 		<h1>Saint Mark and the Demonarchy</h1>
 	</div>
 	<div id="side">
-		<h2>Alphie</h2>
-		<h2>Asleep</h2>
-		<h2>Beyond Control</h2>
-		<h2>Dreamkiller</h2>
-		<h2>For The Love Of God? Album 1</h2>
-		<h2>Forever Free</h2>
-		<h2>Freedom! - Shes A Lonely Gun</h2>
-		<h2>In Car Nations</h2>
-		<h2>Jewel Eye Island</h2>
-		<h2>Love Never Bowed</h2>
-		<h2>Maidens Prayer</h2>
-		<h2>Murder in the Aisles</h2>
-		<h2>Noahs Mistake</h2>
-		<h2>On the Other Side</h2>
-		<h2>Power of the Sun</h2>
-		<h2>Sail Away</h2>
-		<h2>The Beasts Lament</h2>
-		<h2>This Last Dance</h2>
-		<h2>Through the Depths of a Dream</h2>
-		<h2>Universal Queen</h2>
-		<h2>Worlds Without End</h2>
-		<h2>You Need Them</h2>
+		<h2 style="color:slategray;">Alphie</h2>
+		<h2 id="asleep" style="cursor:hand;cursor:pointer">Asleep</h2>
+		<h2 id="beyond" style="cursor:hand;cursor:pointer">Beyond Control</h2>
+		<h2 id="dream" style="cursor:hand;cursor:pointer">Dreamkiller</h2>
+		<h2 style="color:slategray;">For The Love Of God? Album 1</h2>
+		<h2 id="forever" style="cursor:hand;cursor:pointer">Forever Free</h2>
+		<h2 id="freedom" style="cursor:hand;cursor:pointer">Freedom! - Shes A Lonely Gun</h2>
+		<h2 id="incar" style="cursor:hand;cursor:pointer">In Car Nations</h2>
+		<h2 id="jewel" style="cursor:hand;cursor:pointer">Jewel Eye Island</h2>
+		<h2 id="love" style="cursor:hand;cursor:pointer">Love Never Bowed</h2>
+		<h2 id="maidens" style="cursor:hand;cursor:pointer">Maidens Prayer</h2>
+		<h2 id="murder" style="cursor:hand;cursor:pointer">Murder in the Aisles</h2>
+		<h2 id="noahs" style="cursor:hand;cursor:pointer">Noahs Mistake</h2>
+		<h2 id="onthe" style="cursor:hand;cursor:pointer">On the Other Side</h2>
+		<h2 id="power" style="cursor:hand;cursor:pointer">Power of the Sun</h2>
+		<h2 id="sail" style="cursor:hand;cursor:pointer">Sail Away</h2>
+		<h2 style="color:slategray;">The Beasts Lament</h2>
+		<h2 id="this" style="cursor:hand;cursor:pointer">This Last Dance</h2>
+		<h2 id="through" style="cursor:hand;cursor:pointer">Through the Depths of a Dream</h2>
+		<h2 id="universal" style="cursor:hand;cursor:pointer">Universal Queen</h2>
+		<h2 id="worlds" style="cursor:hand;cursor:pointer">Worlds Without End</h2>
+		<h2 style="color:slategray;">You Need Them</h2>
 	</div>
+	<script>
+		var audio = null; 
+		document.getElementById("asleep").onclick = function() {  playTrack("Asleep")  }; 
+		document.getElementById("beyond").onclick = function() {  playTrack("Beyond Control")  };
+		document.getElementById("dream").onclick = function() {  playTrack("Dreamkiller")  };
+		document.getElementById("forever").onclick = function() {  playTrack("Forever Free")  };
+		document.getElementById("freedom").onclick = function() {  playTrack("Freedom")  };
+		document.getElementById("incar").onclick = function() {  playTrack("In Car Nations")  };
+		document.getElementById("jewel").onclick = function() {  playTrack("Jewel Eye Island")  };
+		document.getElementById("love").onclick = function() {  playTrack("Love Never Bowed")  };
+		document.getElementById("maidens").onclick = function() {  playTrack("Maidens Prayer")  };
+		document.getElementById("murder").onclick = function() {  playTrack("Murder in the Aisles")  };
+		document.getElementById("noahs").onclick = function() {  playTrack("Noah")  };
+		document.getElementById("onthe").onclick = function() {  playTrack("On the Other Side")  };
+		document.getElementById("power").onclick = function() {  playTrack("Power of the Sun")  };
+		document.getElementById("sail").onclick = function() {  playTrack("Sail Away")  };
+		document.getElementById("this").onclick = function() {  playTrack("This Last Dance")  };
+		document.getElementById("through").onclick = function() {  playTrack("Through the Depths of a Dream")  };
+		document.getElementById("universal").onclick = function() {  playTrack("Universal Queen")  };
+		document.getElementById("worlds").onclick = function() {  playTrack("Worlds Without End")  };
+		function playTrack(trackname) {
+			if(audio){audio.pause();}
+   			audio = new Audio("music/" + trackname + ".mp3");
+   			audio.play();
+		}  
+	</script>  
+
   </body>
 </html>
