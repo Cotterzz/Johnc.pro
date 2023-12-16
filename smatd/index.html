@@ -63,10 +63,10 @@
 		function playTrack(trackname, id) {
 			if(audio){audio.pause();}
 			if(oldID){
-				document.getElementById(oldID).style = "color:white;"
+				document.getElementById(oldID).style = "color:white;cursor:hand;cursor:pointer"
 			}
 			oldID = id;
-			document.getElementById(id).style = "color:lightblue;"
+			document.getElementById(id).style = "color:lime;"
    			audio = new Audio();
    			audio.src = "music/" + trackname + ".mp3";
     		audio.preload = "auto";
