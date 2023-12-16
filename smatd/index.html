@@ -40,28 +40,37 @@
 		<h2 style="color:slategray;">You Need Them</h2>
 	</div>
 	<script>
-		var audio = null; 
-		document.getElementById("asleep").onclick = function() {  playTrack("Asleep")  }; 
-		document.getElementById("beyond").onclick = function() {  playTrack("Beyond Control")  };
-		document.getElementById("dream").onclick = function() {  playTrack("Dreamkiller")  };
-		document.getElementById("forever").onclick = function() {  playTrack("Forever Free")  };
-		document.getElementById("freedom").onclick = function() {  playTrack("Freedom")  };
-		document.getElementById("incar").onclick = function() {  playTrack("In Car Nations")  };
-		document.getElementById("jewel").onclick = function() {  playTrack("Jewel Eye Island")  };
-		document.getElementById("love").onclick = function() {  playTrack("Love Never Bowed")  };
-		document.getElementById("maidens").onclick = function() {  playTrack("Maidens Prayer")  };
-		document.getElementById("murder").onclick = function() {  playTrack("Murder in the Aisles")  };
-		document.getElementById("noahs").onclick = function() {  playTrack("Noah")  };
-		document.getElementById("onthe").onclick = function() {  playTrack("On the Other Side")  };
-		document.getElementById("power").onclick = function() {  playTrack("Power of the Sun")  };
-		document.getElementById("sail").onclick = function() {  playTrack("Sail Away")  };
-		document.getElementById("this").onclick = function() {  playTrack("This Last Dance")  };
-		document.getElementById("through").onclick = function() {  playTrack("Through the Depths of a Dream")  };
-		document.getElementById("universal").onclick = function() {  playTrack("Universal Queen")  };
-		document.getElementById("worlds").onclick = function() {  playTrack("Worlds Without End")  };
-		function playTrack(trackname) {
+		var audio = null;
+		var oldID = null; 
+		document.getElementById("asleep").onclick = function() {  playTrack("Asleep", "asleep")  }; 
+		document.getElementById("beyond").onclick = function() {  playTrack("Beyond Control","beyond")  };
+		document.getElementById("dream").onclick = function() {  playTrack("Dreamkiller","dream")  };
+		document.getElementById("forever").onclick = function() {  playTrack("Forever Free", "forever")  };
+		document.getElementById("freedom").onclick = function() {  playTrack("Freedom", "freedom")  };
+		document.getElementById("incar").onclick = function() {  playTrack("In Car Nations", "incar")  };
+		document.getElementById("jewel").onclick = function() {  playTrack("Jewel Eye Island", "jewel")  };
+		document.getElementById("love").onclick = function() {  playTrack("Love Never Bowed", "love")  };
+		document.getElementById("maidens").onclick = function() {  playTrack("Maidens Prayer", "maidens")  };
+		document.getElementById("murder").onclick = function() {  playTrack("Murder in the Aisles", "murder")  };
+		document.getElementById("noahs").onclick = function() {  playTrack("Noah", "noahs")  };
+		document.getElementById("onthe").onclick = function() {  playTrack("On the Other Side", "onthe")  };
+		document.getElementById("power").onclick = function() {  playTrack("Power of the Sun", "power")  };
+		document.getElementById("sail").onclick = function() {  playTrack("Sail Away", "sail")  };
+		document.getElementById("this").onclick = function() {  playTrack("This Last Dance", "this")  };
+		document.getElementById("through").onclick = function() {  playTrack("Through the Depths of a Dream", "through")  };
+		document.getElementById("universal").onclick = function() {  playTrack("Universal Queen", "universal")  };
+		document.getElementById("worlds").onclick = function() {  playTrack("Worlds Without End", "worlds")  };
+		function playTrack(trackname, id) {
 			if(audio){audio.pause();}
-   			audio = new Audio("music/" + trackname + ".mp3");
+			if(oldID){
+				document.getElementById(oldID).style = "color:white;"
+			}
+			oldID = id;
+			document.getElementById(id).style = "color:lightblue;"
+   			audio = new Audio();
+   			audio.src = "music/" + trackname + ".mp3";
+    		audio.preload = "auto";
+
    			audio.play();
 		}  
 	</script>  
